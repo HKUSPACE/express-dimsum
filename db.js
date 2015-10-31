@@ -6,6 +6,7 @@ var Todo = new Schema({
     content : String,
     stock : Number,
     price : Number,
+    photo : String,
     updated_at  : Date
 });
 

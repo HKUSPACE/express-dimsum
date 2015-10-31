@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var Todo = mongoose.model('Todo');
+var formidable = require('formidable');
+var util = require('util');
+var fs = require('fs-extra');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -14,15 +17,30 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/create', function(req, res, next){
-    new Todo({
-        content : req.body.content,
-        stock : req.body.stock,
-        price : req.body.price,
-        updated_at  : Date.now()
-    }).save(function(err, todo, count){
-        res.redirect('/');
-    });
+    var form = new formidable.IncomingForm();
+    var photoFilename = "";
+    form.uploadDir = "./public/uploads";
+    form.keepExtensions = true;
+    form.parse(req, function(err, fields, files) {
+        photoFilename = files.photo.name;
+        fs.rename(files.photo.path, './public/uploads/'+files.photo.name, function(err) {
+            if (err)
+                throw err;
+              console.log('renamed complete');  
+            }
+        );
+        new Todo({
+            content : fields.content,
+            stock : fields.stock,
+            price : fields.price,
+            photo : files.photo.name,
+            updated_at  : Date.now()
+        }).save(function(err, todo, count){
+            res.redirect('/');
+        });
         
+    });
+
 });
 
 router.get('/destroy/:id', function(req, res, next){

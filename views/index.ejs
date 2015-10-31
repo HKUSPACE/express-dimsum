@@ -13,18 +13,22 @@
       <div class="container">
           <div class="row">
                 <h1><%= title %></h1>
-                <form action="/create" method="post" accept-charset="utf-8">
+                <form action="/create" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="todo">點心</label>
                         <input type="text" name="content" class="form-control" id="todo"/>  
                     </div>
                     <div class="form-group">
                         <label for="stock">數量</label>
-                        <input type="number" name="stock" class="form-control" / id="stock">
+                        <input type="number" name="stock" class="form-control" id="stock" />
                     </div>
                     <div class="form-group">
                         <label for="price">價格</label>
-                        <input type="number" name="price" class="form-control" / id="price">
+                        <input type="number" name="price" class="form-control" id="price" />
+                    </div>
+                    <div class="form-group">
+                        <label for="photo">相片</label>
+                        <input type="file" name="photo" class="form-contorl" id="photo" />
                     </div>
                     <button type="submit" class="btn btn-primary">新增點心</button>
                 </form>
@@ -38,7 +42,7 @@
                   </tr>
                   <% todos.forEach( function (todo){ %>
                 <tr>
-                    <td><img src="http://placehold.it/150x150" class="img-responsive"/></td>
+                    <td><img src="/uploads/<%= todo.photo %>" class="img-responsive"/></td>
                     <td><a href="/edit/<%= todo._id %>"><%= todo.content %></a></td>
                     <td><%= todo.stock %></td>
                     <td><%= todo.price %></td>
