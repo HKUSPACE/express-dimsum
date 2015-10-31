@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">      
+    <title><%= title %></title>
+    <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+      <div class="container">
+          <div class="row">
+                <h1><%= title %></h1>
+                <form action="/create" method="post" accept-charset="utf-8">
+                    <div class="form-group">
+                        <label for="todo">點心</label>
+                        <input type="text" name="content" class="form-control" id="todo"/>  
+                    </div>
+                    <div class="form-group">
+                        <label for="stock">數量</label>
+                        <input type="number" name="stock" class="form-control" / id="stock">
+                    </div>
+                    <div class="form-group">
+                        <label for="price">價格</label>
+                        <input type="number" name="price" class="form-control" / id="price">
+                    </div>
+                    <button type="submit" class="btn btn-primary">新增點心</button>
+                </form>
+              <table class="table">
+                  <tr>
+                      <th></th>
+                      <th>Name</th>
+                      <th>Stock</th>
+                      <th>Price</th>
+                      <th>Delete</th>
+                  </tr>
+                  <% todos.forEach( function (todo){ %>
+                <tr>
+                    <td><img src="http://placehold.it/150x150" class="img-responsive"/></td>
+                    <td><a href="/edit/<%= todo._id %>"><%= todo.content %></a></td>
+                    <td><%= todo.stock %></td>
+                    <td><%= todo.price %></td>
+                    <td><a href="/destroy/<%= todo._id %>">Delete</a></td>
+                </tr> 
+                <% }); %>
+              </table>
+                
+          </div>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>      
+  </body>
+</html>
+
+
+

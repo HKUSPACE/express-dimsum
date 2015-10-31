@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">        
+    <title><%= title %></title>
+    <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+      <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <form action="/create" method="post" accept-charset="utf-8">
+        <input type="text" name="content" />  
+    </form>
+    <% todos.forEach( function (todo){ %>
+    <p>
+        <span>
+            <% if (todo._id == current) { %>
+            <form action="/update/<%= todo._id %>" method="post" accept-charset="utf-8">
+                <input type="text" name="content" value="<%= todo.content %>" />
+                <input type="number" name="stock" value="<%= todo.stock %>" />
+                <input type="number" name="price" value="<%= todo.price %>" />
+                <button type="submit">更新點心</button>
+            </form>
+            <% }
+                else{ %>
+            <a href="/edit/<%= todo._id %>"><%= todo.content %></a>        
+            <% }%>
+        </span>
+        <span><a href="/destroy/<%= todo._id %>">Delete</a></span>
+    </p> 
+    <% }); %>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>  
+    </body>
+</html>
+
+
+
